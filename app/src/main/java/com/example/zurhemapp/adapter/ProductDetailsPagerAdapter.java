@@ -1,4 +1,4 @@
-package com.example.zurhemapp.Adapter;
+package com.example.zurhemapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class ProductDetailsPagerAdapter extends PagerAdapter {
 
-    Context context;
-    ArrayList<Integer> imgList;
+    private Context context;
+    private ArrayList<Integer> imgList;
 
     public ProductDetailsPagerAdapter(Context context, ArrayList<Integer> imgList) {
         this.context = context;

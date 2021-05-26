@@ -1,4 +1,4 @@
-package com.example.zurhemapp.Model;
+package com.example.zurhemapp.model;
 
 import java.util.List;
 

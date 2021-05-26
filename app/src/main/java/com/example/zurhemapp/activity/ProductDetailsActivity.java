@@ -1,4 +1,4 @@
-package com.example.zurhemapp;
+package com.example.zurhemapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,15 +6,16 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.zurhemapp.Adapter.ProductDetailsPagerAdapter;
 import com.example.zurhemapp.CustomViewpager.CustomViewpager;
+import com.example.zurhemapp.R;
+import com.example.zurhemapp.adapter.ProductDetailsPagerAdapter;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ProductDetails extends AppCompatActivity {
+public class ProductDetailsActivity extends AppCompatActivity {
 
     ProductDetailsPagerAdapter adapter;
     ArrayList<Integer> imgList;
@@ -44,7 +45,7 @@ public class ProductDetails extends AppCompatActivity {
         imgList.add(R.drawable.m2);
         imgList.add(R.drawable.m3);
 
-        adapter = new ProductDetailsPagerAdapter(ProductDetails.this, imgList);
+        adapter = new ProductDetailsPagerAdapter(ProductDetailsActivity.this, imgList);
         proDetailsPager.setAdapter(adapter);
         proDetIndicator.setViewPager(proDetailsPager);
 
@@ -59,7 +60,7 @@ public class ProductDetails extends AppCompatActivity {
 
         @Override
         public void run() {
-            ProductDetails.this.runOnUiThread(new Runnable() {
+            ProductDetailsActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     if (proDetailsPager.getCurrentItem() < adapter.getCount() - 1) {

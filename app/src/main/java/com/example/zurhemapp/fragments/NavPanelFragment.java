@@ -1,5 +1,5 @@
 
-package com.example.zurhemapp.Fragments;
+package com.example.zurhemapp.fragments;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -20,9 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zurhemapp.R;
-import com.example.zurhemapp.Adapter.CategoryAdapter;
+import com.example.zurhemapp.adapter.CategoryAdapter;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
-import com.yarolegovich.discretescrollview.InfiniteScrollAdapter;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -30,21 +29,21 @@ import java.util.TimerTask;
 
 public class NavPanelFragment extends Fragment {
 
-    ArrayList<String> categoryNames;
-    ImageView close;
-    LinearLayout suitsLayout, jacketLayout, tuxLayout;
-    TextView group_item_suits, child_item_suits1, child_item_suits2;
-    TextView group_item_jackets, child_item_jackets1, child_item_jackets2;
-    TextView group_item_tux, child_item_tux1, child_item_tux2;
-    String isSuitExpanded = "no";
-    String isJacketExpanded = "no";
-    String isTuxExpanded = "no";
-    DiscreteScrollView categories;
-    CategoryAdapter categoryAdapter;
-    Timer timer;
-    TimerTask timerTask;
-    int position = 1;
-    LinearLayoutManager linearLayoutManager;
+    private ArrayList<String> categoryNames;
+    private ImageView close;
+    private LinearLayout suitsLayout, jacketLayout, tuxLayout;
+    private TextView group_item_suits, child_item_suits1, child_item_suits2;
+    private TextView group_item_jackets, child_item_jackets1, child_item_jackets2;
+    private TextView group_item_tux, child_item_tux1, child_item_tux2;
+    private String isSuitExpanded = "no";
+    private String isJacketExpanded = "no";
+    private String isTuxExpanded = "no";
+    private DiscreteScrollView categories;
+    private CategoryAdapter categoryAdapter;
+    private Timer timer;
+    private TimerTask timerTask;
+    private int position = 1;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
