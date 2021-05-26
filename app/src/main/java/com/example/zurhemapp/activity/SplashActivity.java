@@ -1,4 +1,4 @@
-package com.example.zurhemapp;
+package com.example.zurhemapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ProgressBar;
 
+import com.example.zurhemapp.R;
+
 public class SplashActivity extends AppCompatActivity {
     private ProgressBar pb;
-    int prgrs;
+    private int prgrs;
 
     @Override
     protected void onStart() {

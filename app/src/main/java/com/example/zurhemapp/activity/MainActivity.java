@@ -1,49 +1,62 @@
-package com.example.zurhemapp;
+package com.example.zurhemapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.example.zurhemapp.Adapter.MainRecyclerAdapter;
-import com.example.zurhemapp.Fragments.NavPanelFragment;
-import com.example.zurhemapp.Model.Image;
+import com.example.zurhemapp.CustomViewpager.CustomViewpager;
+import com.example.zurhemapp.adapter.MainRecyclerAdapter;
+import com.example.zurhemapp.listener.FeatureProductsListener;
+import com.example.zurhemapp.model.Datum;
+import com.example.zurhemapp.fragments.NavPanelFragment;
+import com.example.zurhemapp.model.Image;
+import com.example.zurhemapp.R;
+import com.example.zurhemapp.responses.FeatureProductsResponse;
+import com.example.zurhemapp.viewmodel.ProductViewModel;
 import com.google.android.material.appbar.AppBarLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    ArrayList<Integer> imagelist;
-    ArrayList<Integer> catList;
-    ArrayList<Integer> featuredList;
-    ArrayList<Integer> custom;
-    ArrayList<Integer> layout;
-    ArrayList<Image> imagelistArrayList;
-    RecyclerView viewPagerRecycler;
-    MainRecyclerAdapter mainRecyclerAdapter;
-    ImageView imageView1;
-    ImageView imageView2;
-    FrameLayout navView;
-    Toolbar toolbar1;
-    AppBarLayout toolbar;
-    Fragment fragment = null;
-    LinearLayoutManager layoutManager;
+public class MainActivity extends AppCompatActivity implements FeatureProductsListener {
+    private List<Datum> data = new ArrayList<>();
+    private ArrayList<Integer> imagelist;
+    private ArrayList<Integer> catList;
+    private ArrayList<Integer> featuredList;
+    private ArrayList<Integer> custom;
+    private ArrayList<Integer> layout;
+    private ArrayList<Image> imagelistArrayList;
+    private RecyclerView viewPagerRecycler;
+    private MainRecyclerAdapter mainRecyclerAdapter;
+    private ImageView imageView1;
+    private ImageView imageView2;
+    private FrameLayout navView;
+    private Toolbar toolbar1;
+    private Fragment fragment = null;
+    private LinearLayoutManager layoutManager;
     boolean isLoading = false;
+
+    private ProductViewModel productViewModel;
+    private int currentPage = 1;
+    private int totalAvailablePages = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         imageView1 = findViewById(R.id.imageView1);
         imageView2 = findViewById(R.id.imageView2);
         navView = findViewById(R.id.navView);
-//        toolbar = findViewById(R.id.toolbar);
         toolbar1 = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar1);
         imageView1.setOnClickListener(new View.OnClickListener() {
@@ -83,10 +96,6 @@ public class MainActivity extends AppCompatActivity {
         featuredList.add(R.drawable.woman1);
         featuredList.add(R.drawable.woman2);
         featuredList.add(R.drawable.man2);
-        featuredList.add(R.drawable.man3);
-        featuredList.add(R.drawable.woman3);
-        featuredList.add(R.drawable.man1);
-        featuredList.add(R.drawable.woman4);
 
         imagelistArrayList.add(new Image(imagelist));
         imagelistArrayList.add(new Image(catList));
@@ -94,20 +103,40 @@ public class MainActivity extends AppCompatActivity {
         imagelistArrayList.add(new Image(featuredList));
         imagelistArrayList.add(new Image(layout));
 
+
         layoutManager = new LinearLayoutManager(MainActivity.this);
         viewPagerRecycler = findViewById(R.id.ViewPagerRecycler);
-        mainRecyclerAdapter = new MainRecyclerAdapter(MainActivity.this, MainActivity.this, imagelistArrayList);
+        mainRecyclerAdapter = new MainRecyclerAdapter(MainActivity.this, MainActivity.this, imagelistArrayList, data, this);
         viewPagerRecycler.setLayoutManager(layoutManager);
         viewPagerRecycler.setAdapter(mainRecyclerAdapter);
 
+        getFeatureProduct();
 
     }
 
+    public void getFeatureProduct(){
+        productViewModel.getFeatureProduct(currentPage).observe(this, FeatureProductsResponse ->{
+            if (FeatureProductsResponse != null){
+                totalAvailablePages = FeatureProductsResponse.getMeta().getLastPage();
+                if (FeatureProductsResponse.getData() != null){
+                    data.addAll(FeatureProductsResponse.getData());
+                    mainRecyclerAdapter.notifyDataSetChanged();
+                }
+            }
+        });
 
-
+    }
 
     @Override
     public void onBackPressed() {
 
+    }
+
+    @Override
+    public void onScroll() {
+        if (currentPage <= totalAvailablePages){
+            currentPage += 1;
+            getFeatureProduct();
+        }
     }
 }

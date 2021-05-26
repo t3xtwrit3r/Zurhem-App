@@ -1,10 +1,9 @@
-package com.example.zurhemapp.Adapter;
+package com.example.zurhemapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,8 +15,8 @@ import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    Context context;
-    ArrayList<String> categoryNames;
+    private Context context;
+    private ArrayList<String> categoryNames;
 
     public CategoryAdapter(Context context, ArrayList<String> categoryNames) {
         this.context = context;

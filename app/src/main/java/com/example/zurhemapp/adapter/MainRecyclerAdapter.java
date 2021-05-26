@@ -1,7 +1,8 @@
-package com.example.zurhemapp.Adapter;
+package com.example.zurhemapp.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.zurhemapp.CustomViewpager.CustomViewpager;
-import com.example.zurhemapp.Model.Image;
+import com.example.zurhemapp.listener.FeatureProductsListener;
+import com.example.zurhemapp.model.Datum;
+import com.example.zurhemapp.model.Image;
 import com.example.zurhemapp.R;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,15 +32,19 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     public static final int show_bottom = 0;
     public static final int showTop = 1;
 
-    Context context;
-    Activity activity;
-    ArrayList<Image> imagelistArrayList;
+    private Context context;
+    private Activity activity;
+    private ArrayList<Image> imagelistArrayList;
+    private List<Datum> data;
+    FeatureProductsListener featureProductsListener;
 
 
-    public MainRecyclerAdapter(Context context, Activity activity, ArrayList<Image> imagelistArrayList) {
+    public MainRecyclerAdapter(Context context, Activity activity, ArrayList<Image> imagelistArrayList, List<Datum> data, FeatureProductsListener featureProductsListener) {
         this.context = context;
         this.activity = activity;
         this.imagelistArrayList = imagelistArrayList;
+        this.data = data;
+        this.featureProductsListener = featureProductsListener;
     }
 
 
@@ -54,10 +63,13 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(imagelistArrayList.get(position), context, position);
+        MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(imagelistArrayList.get(position), context, position, data);
+        featureProductsListener.onScroll();
+        mainPagerAdapter.notifyDataSetChanged();
         if (position!=imagelistArrayList.size()-1){
             holder.pager.setAdapter(mainPagerAdapter);
         }
+
         if (position == 0){
             holder.dotsIndicator.setViewPager(holder.pager);
         }
@@ -79,9 +91,9 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
         Timer timer = new Timer();
         if (position == 3){
             holder.pager.setPadding(0,110,0,0);
-            timer.scheduleAtFixedRate(new MyTimerTask(holder.pager, 8),2000,3500);
+            timer.scheduleAtFixedRate(new MyTimerTask(holder.pager, data.size()),2000,3500);
             holder.featuredItems.setVisibility(View.VISIBLE);
-        } else if (position == 0 || position == 1 || position == 2){
+        } else if (position == 0 || position == 1){
             timer.scheduleAtFixedRate(new MyTimerTask(holder.pager, 3),2000,3500);
         }
 
