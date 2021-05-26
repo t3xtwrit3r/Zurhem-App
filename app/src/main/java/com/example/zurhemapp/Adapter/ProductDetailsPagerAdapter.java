@@ -43,8 +43,12 @@ public class ProductDetailsPagerAdapter extends PagerAdapter {
 
         proDetImgView = view.findViewById(R.id.proDetImgView);
 
-//        proDetImgView.setImageResource(imgList.get(position));
-        Glide.with(context).load(imgList.get(position)).into(proDetImgView);
+        Integer img = imgList.get(position);
+
+        if (img != null){
+            Glide.with(context).load(img).into(proDetImgView);
+        }
+
 
         container.addView(view, 0);
 

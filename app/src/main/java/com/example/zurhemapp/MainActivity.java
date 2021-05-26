@@ -31,10 +31,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView2;
     FrameLayout navView;
     Toolbar toolbar1;
-    AppBarLayout toolbar;
     Fragment fragment = null;
     LinearLayoutManager layoutManager;
-    boolean isLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         imageView1 = findViewById(R.id.imageView1);
         imageView2 = findViewById(R.id.imageView2);
         navView = findViewById(R.id.navView);
-//        toolbar = findViewById(R.id.toolbar);
         toolbar1 = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar1);
         imageView1.setOnClickListener(new View.OnClickListener() {

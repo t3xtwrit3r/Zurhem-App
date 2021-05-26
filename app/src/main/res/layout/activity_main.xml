@@ -30,8 +30,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginRight="@dimen/_15sdp">
+                android:layout_marginEnd="@dimen/_15sdp">
 
                 <ImageView
                     android:id="@+id/imageView1"
@@ -66,6 +65,7 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ViewPagerRecycler"

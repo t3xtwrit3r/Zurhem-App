@@ -3,7 +3,9 @@ package com.example.zurhemapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.zurhemapp.Adapter.ProductDetailsPagerAdapter;
 import com.example.zurhemapp.CustomViewpager.CustomViewpager;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
@@ -18,6 +20,7 @@ public class ProductDetails extends AppCompatActivity {
     ArrayList<Integer> imgList;
     CustomViewpager proDetailsPager;
     DotsIndicator proDetIndicator;
+    ImageView productImage1, productImage2, productImage3, productImage4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,10 @@ public class ProductDetails extends AppCompatActivity {
 
         proDetailsPager = findViewById(R.id.proDetailsPager);
         proDetIndicator = findViewById(R.id.proDetIndicator);
+        productImage1 = findViewById(R.id.productImage1);
+        productImage2 = findViewById(R.id.productImage2);
+        productImage3 = findViewById(R.id.productImage3);
+        productImage4 = findViewById(R.id.productImage4);
 
         imgList = new ArrayList<>();
 
@@ -40,6 +47,11 @@ public class ProductDetails extends AppCompatActivity {
         adapter = new ProductDetailsPagerAdapter(ProductDetails.this, imgList);
         proDetailsPager.setAdapter(adapter);
         proDetIndicator.setViewPager(proDetailsPager);
+
+        Glide.with(this).load(R.drawable.man2).into(productImage1);
+        Glide.with(this).load(R.drawable.m1).into(productImage2);
+        Glide.with(this).load(R.drawable.m2).into(productImage3);
+        Glide.with(this).load(R.drawable.m3).into(productImage4);
 
     }
 
