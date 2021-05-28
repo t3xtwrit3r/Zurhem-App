@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.zurhemapp.R;
+import com.example.zurhemapp.activity.CategoryItemActivity;
 import com.example.zurhemapp.activity.ProductDetailsActivity;
 import com.example.zurhemapp.model.Datum;
 
@@ -46,7 +47,9 @@ public class CategoryItemsAdapter extends RecyclerView.Adapter<CategoryItemsAdap
         holder.productImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.getContext().startActivity(new Intent(v.getContext(), ProductDetailsActivity.class));
+                Intent intent = new Intent(v.getContext(), ProductDetailsActivity.class);
+                intent.putExtra("id", categoryItemsList.get(position).getId());
+                v.getContext().startActivity(intent);
             }
         });
 

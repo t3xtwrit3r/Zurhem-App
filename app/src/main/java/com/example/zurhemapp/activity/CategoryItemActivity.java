@@ -56,7 +56,7 @@ public class CategoryItemActivity extends AppCompatActivity {
 
     public void getCategoryItems(){
 
-        categoryItemsViewModel.getCategoryItems(currentPage).observe(this, CategoryItemResponse -> {
+        categoryItemsViewModel.getCategoryItems(getIntent().getStringExtra("slug"), currentPage).observe(this, CategoryItemResponse -> {
             if (CategoryItemResponse != null){
                 totalAvailablePages = CategoryItemResponse.getMeta().getLastPage();
                 if (CategoryItemResponse.getData() != null){

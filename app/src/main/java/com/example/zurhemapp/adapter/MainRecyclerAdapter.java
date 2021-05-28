@@ -12,10 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.zurhemapp.CustomViewpager.CustomViewpager;
+import com.example.zurhemapp.customViewpager.CustomViewpager;
 import com.example.zurhemapp.listener.FeatureProductsListener;
 import com.example.zurhemapp.model.Datum;
-import com.example.zurhemapp.model.Image;
+import com.example.zurhemapp.model.MainActivityImage;
 import com.example.zurhemapp.R;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
@@ -32,12 +32,12 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
 
     private Context context;
     private Activity activity;
-    private ArrayList<Image> imagelistArrayList;
+    private ArrayList<MainActivityImage> imagelistArrayList;
     private List<Datum> data;
     FeatureProductsListener featureProductsListener;
 
 
-    public MainRecyclerAdapter(Context context, Activity activity, ArrayList<Image> imagelistArrayList, List<Datum> data, FeatureProductsListener featureProductsListener) {
+    public MainRecyclerAdapter(Context context, Activity activity, ArrayList<MainActivityImage> imagelistArrayList, List<Datum> data, FeatureProductsListener featureProductsListener) {
         this.context = context;
         this.activity = activity;
         this.imagelistArrayList = imagelistArrayList;

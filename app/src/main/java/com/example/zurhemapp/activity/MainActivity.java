@@ -6,23 +6,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.example.zurhemapp.CustomViewpager.CustomViewpager;
 import com.example.zurhemapp.adapter.MainRecyclerAdapter;
 import com.example.zurhemapp.listener.FeatureProductsListener;
 import com.example.zurhemapp.model.Datum;
 import com.example.zurhemapp.fragments.NavPanelFragment;
-import com.example.zurhemapp.model.Image;
+import com.example.zurhemapp.model.MainActivityImage;
 import com.example.zurhemapp.R;
-import com.example.zurhemapp.responses.FeatureProductsResponse;
-import com.example.zurhemapp.viewmodel.ProductViewModel;
-import com.google.android.material.appbar.AppBarLayout;
+import com.example.zurhemapp.viewmodel.FeatureProductViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements FeatureProductsLi
     private ArrayList<Integer> featuredList;
     private ArrayList<Integer> custom;
     private ArrayList<Integer> layout;
-    private ArrayList<Image> imagelistArrayList;
+    private ArrayList<MainActivityImage> imagelistArrayList;
     private RecyclerView viewPagerRecycler;
     private MainRecyclerAdapter mainRecyclerAdapter;
     private ImageView imageView1;
@@ -45,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements FeatureProductsLi
     private LinearLayoutManager layoutManager;
     boolean isLoading = false;
 
-    private ProductViewModel productViewModel;
+    private FeatureProductViewModel featureProductViewModel;
     private int currentPage = 1;
     private int totalAvailablePages = 1;
 
@@ -53,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements FeatureProductsLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
+        featureProductViewModel = ViewModelProviders.of(this).get(FeatureProductViewModel.class);
         imageView1 = findViewById(R.id.imageView1);
         imageView2 = findViewById(R.id.imageView2);
         navView = findViewById(R.id.navView);
@@ -97,11 +93,11 @@ public class MainActivity extends AppCompatActivity implements FeatureProductsLi
         featuredList.add(R.drawable.woman2);
         featuredList.add(R.drawable.man2);
 
-        imagelistArrayList.add(new Image(imagelist));
-        imagelistArrayList.add(new Image(catList));
-        imagelistArrayList.add(new Image(custom));
-        imagelistArrayList.add(new Image(featuredList));
-        imagelistArrayList.add(new Image(layout));
+        imagelistArrayList.add(new MainActivityImage(imagelist));
+        imagelistArrayList.add(new MainActivityImage(catList));
+        imagelistArrayList.add(new MainActivityImage(custom));
+        imagelistArrayList.add(new MainActivityImage(featuredList));
+        imagelistArrayList.add(new MainActivityImage(layout));
 
 
         layoutManager = new LinearLayoutManager(MainActivity.this);
@@ -115,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements FeatureProductsLi
     }
 
     public void getFeatureProduct(){
-        productViewModel.getFeatureProduct(currentPage).observe(this, FeatureProductsResponse ->{
+        featureProductViewModel.getFeatureProduct(currentPage).observe(this, FeatureProductsResponse ->{
             if (FeatureProductsResponse != null){
                 totalAvailablePages = FeatureProductsResponse.getMeta().getLastPage();
                 if (FeatureProductsResponse.getData() != null){

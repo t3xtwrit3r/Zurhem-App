@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.example.zurhemapp.CustomViewpager.CustomViewpager
+            <com.example.zurhemapp.customViewpager.CustomViewpager
                 android:id="@+id/proDetailsPager"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_400sdp"
@@ -110,7 +110,6 @@
                 android:layout_marginVertical="@dimen/_5sdp"
                 android:fontFamily="@font/gill"
                 android:gravity="center"
-                android:text="Washed Blue Slim-Fit Jeans with Dg Logo"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +123,6 @@
                 android:layout_marginVertical="@dimen/_5sdp"
                 android:fontFamily="@font/gill"
                 android:gravity="center"
-                android:text="$945"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
@@ -195,14 +193,14 @@
                     android:layout_centerVertical="true"
                     android:layout_marginVertical="@dimen/_5sdp"
                     android:drawablePadding="@dimen/_2sdp"
-                    android:drawableTint="@color/black"
                     android:fontFamily="@font/gill"
                     android:gravity="center_vertical"
                     android:text="Add To Wishlist"
                     android:textColor="#000000"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
-                    app:drawableLeftCompat="@drawable/ic_baseline_favorite_border_24" />
+                    app:drawableLeftCompat="@drawable/ic_baseline_favorite_border_24"
+                    app:drawableTint="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -211,13 +209,15 @@
                     android:layout_centerVertical="true"
                     android:layout_marginVertical="@dimen/_8sdp"
                     android:drawablePadding="@dimen/_5sdp"
+                    android:includeFontPadding="false"
                     android:fontFamily="@font/gill"
                     android:gravity="center_vertical"
                     android:text="Share"
                     android:textColor="#000000"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
-                    app:drawableLeftCompat="@drawable/share" />
+                    app:drawableLeftCompat="@drawable/share"
+                    app:drawableTint="@color/black" />
 
             </RelativeLayout>
 

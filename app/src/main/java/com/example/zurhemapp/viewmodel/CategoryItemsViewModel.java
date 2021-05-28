@@ -14,8 +14,8 @@ public class CategoryItemsViewModel extends ViewModel {
         categoryItemsRepository = new CategoryItemsRepository();
     }
 
-    public LiveData<CategoryItemResponse> getCategoryItems(int page){
-        return categoryItemsRepository.getCategoryItems(page);
+    public LiveData<CategoryItemResponse> getCategoryItems(String slug, int page){
+        return categoryItemsRepository.getCategoryItems(slug, page);
     }
 
 }

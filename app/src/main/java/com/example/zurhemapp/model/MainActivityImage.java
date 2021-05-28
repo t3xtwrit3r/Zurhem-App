@@ -2,10 +2,10 @@ package com.example.zurhemapp.model;
 
 import java.util.List;
 
-public class Image {
+public class MainActivityImage {
     private List<Integer> drawableImage;
 
-    public Image(List<Integer> drawableImage) {
+    public MainActivityImage(List<Integer> drawableImage) {
         this.drawableImage = drawableImage;
     }
 

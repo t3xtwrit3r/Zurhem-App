@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.example.zurhemapp.CustomViewpager.CustomViewpager
+    <com.example.zurhemapp.customViewpager.CustomViewpager
         android:paddingBottom="@dimen/_10sdp"
         android:id="@+id/pager"
         android:layout_width="match_parent"

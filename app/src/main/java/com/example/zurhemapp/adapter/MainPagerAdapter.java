@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,20 +17,20 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.bumptech.glide.Glide;
 import com.example.zurhemapp.activity.CategoryItemActivity;
 import com.example.zurhemapp.model.Datum;
-import com.example.zurhemapp.model.Image;
+import com.example.zurhemapp.model.MainActivityImage;
 import com.example.zurhemapp.R;
 
 import java.util.List;
 
 public class MainPagerAdapter extends PagerAdapter {
 
-    private Image image;
+    private MainActivityImage mainActivityImage;
     private Context context;
     private int value;
     private List<Datum> data;
 
-    public MainPagerAdapter(Image image, Context context, int value, List<Datum> data) {
-        this.image = image;
+    public MainPagerAdapter(MainActivityImage mainActivityImage, Context context, int value, List<Datum> data) {
+        this.mainActivityImage = mainActivityImage;
         this.context = context;
         this.value = value;
         this.data = data;
@@ -40,7 +39,7 @@ public class MainPagerAdapter extends PagerAdapter {
     @Override
     public int getCount() {
         if (value!=3){
-            return image.getDrawableImage().size();
+            return mainActivityImage.getDrawableImage().size();
         } else {
             return data.size();
         }
@@ -58,7 +57,7 @@ public class MainPagerAdapter extends PagerAdapter {
         View view = LayoutInflater.from(context).inflate(R.layout.main_slider_item, container, false);
         if (value == 0){
             ImageView images = view.findViewById(R.id.image_view);
-            Glide.with(context).load(image.getDrawableImage().get(position)).into(images);
+            Glide.with(context).load(mainActivityImage.getDrawableImage().get(position)).into(images);
         } else if(value == 1){
             LinearLayout layout = view.findViewById(R.id.linearLayout);
             layout.setVisibility(View.VISIBLE);
@@ -74,6 +73,7 @@ public class MainPagerAdapter extends PagerAdapter {
                         btnCollection.setBackgroundResource(R.drawable.btn_bg2);
                         text.setTextColor(Color.parseColor("#FFC107"));
                         Intent intent = new Intent(v.getContext(), CategoryItemActivity.class);
+                        intent.putExtra("slug", "men");
                         v.getContext().startActivity(intent);
                         ((Activity)context).finish();
                     }
@@ -81,12 +81,23 @@ public class MainPagerAdapter extends PagerAdapter {
             } else if (position == 1){
                 TextView textView = view.findViewById(R.id.catName);
                 textView.setText("WOMEN");
+                btnCollection.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        btnCollection.setBackgroundResource(R.drawable.btn_bg2);
+                        text.setTextColor(Color.parseColor("#FFC107"));
+                        Intent intent = new Intent(v.getContext(), CategoryItemActivity.class);
+                        intent.putExtra("slug", "women");
+                        v.getContext().startActivity(intent);
+                        ((Activity)context).finish();
+                    }
+                });
             } else if (position == 2){
                 TextView textView = view.findViewById(R.id.catName);
                 textView.setText("GIFTS");
             }
             Glide.with(context)
-                    .load(image.getDrawableImage().get(position))
+                    .load(mainActivityImage.getDrawableImage().get(position))
                     .into(images);
         } else if (value == 2){
             LinearLayout layout = view.findViewById(R.id.linearLayout);
@@ -107,7 +118,7 @@ public class MainPagerAdapter extends PagerAdapter {
             text.setText("Design Now");
             ImageView images = view.findViewById(R.id.image_view);
             Glide.with(context)
-                    .load(image.getDrawableImage().get(position))
+                    .load(mainActivityImage.getDrawableImage().get(position))
                     .into(images);
         } else if (value == 3){
             LinearLayout featuredSlider = view.findViewById(R.id.featuredSlider);

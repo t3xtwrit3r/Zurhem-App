@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel;
 import com.example.zurhemapp.repository.FeatureProductRepository;
 import com.example.zurhemapp.responses.FeatureProductsResponse;
 
-public class ProductViewModel extends ViewModel {
+public class FeatureProductViewModel extends ViewModel {
 
     private FeatureProductRepository featureProductRepository;
 
-    public ProductViewModel(){
+    public FeatureProductViewModel(){
         featureProductRepository = new FeatureProductRepository();
     }
 

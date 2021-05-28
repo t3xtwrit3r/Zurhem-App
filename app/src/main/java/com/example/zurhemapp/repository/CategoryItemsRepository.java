@@ -21,9 +21,9 @@ public class CategoryItemsRepository {
         apiService = ApiClient.getRetrofit().create(ApiService.class);
     }
 
-    public LiveData<CategoryItemResponse> getCategoryItems(int page){
+    public LiveData<CategoryItemResponse> getCategoryItems(String slug, int page){
         MutableLiveData<CategoryItemResponse> data = new MutableLiveData<>();
-        apiService.getCategoryItems(page).enqueue(new Callback<CategoryItemResponse>() {
+        apiService.getCategoryItems(slug, page).enqueue(new Callback<CategoryItemResponse>() {
             @Override
             public void onResponse(@NonNull Call<CategoryItemResponse> call, @NonNull Response<CategoryItemResponse> response) {
                 data.setValue(response.body());
